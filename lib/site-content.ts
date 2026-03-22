@@ -8,7 +8,7 @@ export const siteContent = {
   ],
   socials: {
     youtube: 'https://youtube.com/@cassmw',
-    instagram: 'https://instagram.com/',
+    instagram: 'https://instagram.com/cassmw.photo',
     email: 'cassianmw@gmail.com',
   },
   hero: {
@@ -59,7 +59,7 @@ export const siteContent = {
   },
   videos: {
     title: 'Latest Videos',
-    subtitle: 'CassMW on YouTube',
+    subtitle: 'Cassian Murray-White on YouTube',
     featured: {
       title: 'Chasing the Next Mile',
       subtitle: 'Training Vlog',

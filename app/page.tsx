@@ -5,20 +5,8 @@ import { FadeUp } from '@/components/animated';
 import { ImageCard } from '@/components/image-card';
 import { SectionTitle } from '@/components/section-title';
 import { siteContent } from '@/lib/site-content';
-import { getLatestYoutubeVideos } from '@/lib/youtube';
 
-export default async function HomePage() {
-  let latestVideos = [] as Awaited<ReturnType<typeof getLatestYoutubeVideos>>;
-
-  try {
-    latestVideos = await getLatestYoutubeVideos(3);
-  } catch {
-    latestVideos = [];
-  }
-
-  const featuredVideo = latestVideos[0];
-  const sideVideos = latestVideos.slice(1, 3);
-
+export default function HomePage() {
   return (
     <main>
       <section className="relative isolate overflow-hidden">
@@ -73,58 +61,49 @@ export default async function HomePage() {
 
         <div className="section-divider mt-14">
           <SectionTitle title={siteContent.videos.title} subtitle={siteContent.videos.subtitle} />
-
-          {featuredVideo ? (
-            <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-              <FadeUp>
-                <a
-                  href={featuredVideo.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group relative block min-h-[440px] overflow-hidden rounded-[1.75rem] border border-white/10 shadow-soft"
-                >
-                  <Image
-                    src={featuredVideo.thumbnail}
-                    alt={featuredVideo.title}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 65vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                    <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-sm text-zinc-200 backdrop-blur-sm">
-                      <Play className="h-4 w-4" /> Latest Upload
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-bold text-white md:text-4xl">{featuredVideo.title}</h3>
-                      <p className="mt-2 text-sm uppercase tracking-[0.2em] text-zinc-300">
-                        {featuredVideo.publishedAt
-                          ? new Date(featuredVideo.publishedAt).toLocaleDateString()
-                          : 'New video'}
-                      </p>
-                      <span className="mt-6 inline-flex border border-white bg-black px-7 py-4 text-base font-bold uppercase tracking-wide transition group-hover:bg-white group-hover:text-black">
-                        Watch Now
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </FadeUp>
-
-              <div className="grid gap-4">
-                {sideVideos.map((item, index) => (
-                  <FadeUp delay={0.08 * (index + 1)} key={item.id}>
-                    <ImageCard title={item.title} image={item.thumbnail} href={item.url} tall />
-                  </FadeUp>
-                ))}
-              </div>
-            </div>
-          ) : (
+          <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
             <FadeUp>
-              <div className="rounded-[1.75rem] border border-dashed border-white/15 bg-zinc-950/70 p-8 text-zinc-400">
-                Add your YouTube API key and channel ID to show your latest uploads here.
-              </div>
+              <a
+                href={siteContent.videos.featured.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative block min-h-[440px] overflow-hidden rounded-[1.75rem] border border-white/10 shadow-soft"
+              >
+                <Image
+                  src={siteContent.videos.featured.image}
+                  alt={siteContent.videos.featured.title}
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                  <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-sm text-zinc-200 backdrop-blur-sm">
+                    <Play className="h-4 w-4" /> Featured Video
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-white md:text-4xl">
+                      {siteContent.videos.featured.title}
+                    </h3>
+                    <p className="mt-1 text-lg text-zinc-200">
+                      {siteContent.videos.featured.subtitle}
+                    </p>
+                    <span className="mt-6 inline-flex border border-white bg-black px-7 py-4 text-base font-bold uppercase tracking-wide transition group-hover:bg-white group-hover:text-black">
+                      Watch Now
+                    </span>
+                  </div>
+                </div>
+              </a>
             </FadeUp>
-          )}
+
+            <div className="grid gap-4">
+              {siteContent.videos.videos.slice(0, 2).map((item, index) => (
+                <FadeUp delay={0.08 * (index + 1)} key={item.title}>
+                  <ImageCard title={item.title} image={item.image} href="/youtube" tall />
+                </FadeUp>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="section-divider mt-14">
