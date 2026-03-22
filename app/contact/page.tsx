@@ -31,7 +31,7 @@ export default function ContactPage() {
             >
               <Instagram className="h-6 w-6" />
               <h2 className="mt-4 text-xl font-bold">Instagram</h2>
-              <p className="mt-2 text-zinc-400">Link your profile here</p>
+              <p className="mt-2 text-zinc-400">@cassmw</p>
             </a>
             <a
               href={siteContent.socials.youtube}
@@ -41,7 +41,7 @@ export default function ContactPage() {
             >
               <Youtube className="h-6 w-6" />
               <h2 className="mt-4 text-xl font-bold">YouTube</h2>
-              <p className="mt-2 text-zinc-400">Connect your channel here</p>
+              <p className="mt-2 text-zinc-400">Cassian Murray-White</p>
             </a>
           </div>
         </FadeUp>
