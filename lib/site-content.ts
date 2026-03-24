@@ -1,11 +1,12 @@
 export const siteContent = {
   brand: 'CASSIAN MURRAY-WHITE',
-  nav: [
-    { label: 'Photography', href: '/photography' },
-    { label: 'YouTube', href: '/youtube' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-  ],
+ nav: [
+  { label: 'Photography', href: '/photography' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'YouTube', href: '/youtube' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+],
   socials: {
     youtube: 'https://youtube.com/@cassmw',
     instagram: 'https://instagram.com/cassmw.photo',
