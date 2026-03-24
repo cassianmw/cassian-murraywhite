@@ -5,8 +5,13 @@ import { FadeUp } from '@/components/animated';
 import { ImageCard } from '@/components/image-card';
 import { SectionTitle } from '@/components/section-title';
 import { siteContent } from '@/lib/site-content';
+import { photoPosts } from '@/lib/photo-posts';
+import { blogPosts } from '@/lib/blog-posts';
 
 export default function HomePage() {
+  const latestPhotoPosts = photoPosts.slice(0, 3);
+  const latestBlogPosts = blogPosts.slice(0, 2);
+
   return (
     <main>
       <section className="relative isolate overflow-hidden">
@@ -37,10 +42,10 @@ export default function HomePage() {
             </FadeUp>
             <FadeUp delay={0.2}>
               <Link
-                href={siteContent.hero.buttonHref}
+                href="/journal"
                 className="mt-8 inline-flex border border-white bg-black px-8 py-4 text-base font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black"
               >
-                {siteContent.hero.buttonLabel}
+                Enter the Journal
               </Link>
             </FadeUp>
           </div>
@@ -49,11 +54,69 @@ export default function HomePage() {
 
       <section className="section-shell py-10 md:py-14">
         <div className="section-divider">
-          <SectionTitle title={siteContent.photography.title} />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {siteContent.photography.categories.map((item, index) => (
-              <FadeUp delay={index * 0.08} key={item.title}>
-                <ImageCard title={item.title} image={item.image} href={item.href} />
+          <SectionTitle
+            title="Latest Photography Stories"
+            subtitle="Recent visual stories, shoots, and gallery posts."
+          />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {latestPhotoPosts.map((post, index) => (
+              <FadeUp delay={index * 0.08} key={post.slug}>
+                <div className="space-y-3">
+                  <ImageCard
+                    title={post.title}
+                    image={post.coverImage}
+                    href={`/photography/${post.slug}`}
+                  />
+                  <div>
+                    <div className="mb-2 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      <span>{post.category}</span>
+                      <span>•</span>
+                      <span>{post.date}</span>
+                    </div>
+                    <p className="text-sm text-zinc-400">{post.excerpt}</p>
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+
+        <div className="section-divider mt-14">
+          <SectionTitle
+            title="Latest Writing"
+            subtitle="Thoughts on running, creativity, training, and storytelling."
+          />
+          <div className="grid gap-6 lg:grid-cols-2">
+            {latestBlogPosts.map((post, index) => (
+              <FadeUp delay={index * 0.08} key={post.slug}>
+                <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-zinc-950 shadow-soft">
+                  <Link href={`/journal/${post.slug}`} className="block">
+                    <div className="relative min-h-[260px]">
+                      <Image
+                        src={post.coverImage}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                  </Link>
+                  <div className="p-6 md:p-8">
+                    <div className="mb-3 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      <span>{post.category}</span>
+                      <span>•</span>
+                      <span>{post.date}</span>
+                    </div>
+                    <Link href={`/journal/${post.slug}`}>
+                      <h3 className="text-2xl font-bold text-white transition hover:text-zinc-300">
+                        {post.title}
+                      </h3>
+                    </Link>
+                    <p className="mt-4 text-base leading-7 text-zinc-400">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                </article>
               </FadeUp>
             ))}
           </div>

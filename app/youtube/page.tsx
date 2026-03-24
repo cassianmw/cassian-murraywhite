@@ -9,8 +9,12 @@ export default function YoutubePage() {
     <main className="section-shell py-10 md:py-14">
       <div className="section-divider">
         <FadeUp>
-          <SectionTitle title="YouTube" subtitle="Training vlogs, race recaps, and creative storytelling." />
+          <SectionTitle
+            title="Video"
+            subtitle="Training vlogs, race recaps, and cinematic storytelling."
+          />
         </FadeUp>
+
         <FadeUp delay={0.08}>
           <a
             href={siteContent.socials.youtube}
@@ -21,6 +25,7 @@ export default function YoutubePage() {
             <Play className="h-4 w-4" /> Visit Channel
           </a>
         </FadeUp>
+
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {siteContent.videos.videos.map((item, index) => (
             <FadeUp delay={index * 0.08} key={item.title}>
