@@ -16,7 +16,7 @@ export const photoPosts: PhotoPost[] = [
     date: '2026-03-20',
     excerpt: 'A cold-weather running and landscape session in Jasper.',
     coverImage:
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=80',
+      'https://www.flickr.com/photos/185863864@N08/55165442025/in/dateposted-public/',
     category: 'Running',
     location: 'Jasper, Alberta',
     images: [
